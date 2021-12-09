@@ -1,9 +1,12 @@
 #include "usuario.h"
-#include "maquina.h"
 
 usuario::usuario(){
-	
+	idUsuario_ = contrasena_ = mail_ = nombreCompleto_ = "";
+	tiempo_ = recursos_ = telefono_ =0;
+	reservas_.clear();
 }
+
+usuario::~usuario(){}
 
 void usuario::crearReserva(){
 
@@ -17,26 +20,44 @@ void usuario::eliminarReserva(){
 
 }
 
-void usuario::consultarReserva(){
+void usuario::cargarReserva(){
 	
-	//iftream fich(idUsuario_+".dat");
-	fich.open(idUsuario_+"_reservas.txt", ios::in);
+	reservas_.clear();
+		ifstream fiche("reservas.txt");		//Abre fichero en modo lectura
 
-  if (!fich.is_open())
-  {
-    cout << "Error al abrir el fichero de reservas\n";
-    exit(EXIT_FAILURE);
-  }
+		string user, init, fin, recur;	
+		
+		getline(fiche,user,',');		        //Leer fichero hasta la primera cola almacenandolo en un string
 
-    char idmaquina[255],tInicio[255],tFinal[255],recursos[255];
-    cout<<"Máquina:	Fecha de inicio:	Fecha final:	Recursos:"<<endl;                          
-    while(f.getline(idmaquina, 255, ',')){ 
-        fiche.getline(tInicio, 255, ',');
-        fiche.getline(tFinal, 255, ',');
-        fiche.getline(recursos, 255, '\n');
-        cout<<idmaquina<<"\t"<<tInicio<<"\t"<<tFinal<<"\t"<<recursos<<endl;
-    }
-    f.close();
+		while (!fiche.eof()){
+			
+			getline(fiche,init,',');
+			getline(fiche,fin,',');
+			getline(fiche,recur,'\n');
+			
+			if (user==getID()){
+			reserva aux;
+			aux.RUsuario_=user;
+			aux.RInicio_=init;
+			aux.RFin_=fin;
+			aux.RRecursos_=recur;
+
+			reservas_.push_back(aux);	//Añadir la nueva reserva al final de la lista
+			}
+
+			getline(fiche,user,',');		//Si en la ultima vuelta no hace esto no llega 
+											//al final y vuelve a recorer el while lo que proboca error
+		}
+	fiche.close();
+}
+
+void usuario::consultarReserva(){
+	cargarReserva();
+	list<reserva>::iterator it;
+	cout<<"Fecha de inicio \t Fecha de finalización \t Recursos reservados\n";
+	for (it = reservas_.begin(); it != reservas_.end(); ++it){
+			cout<<it->RInicio_<<"\t"<<it->RFin_<<"\t"<<it->RRecursos_<<endl;
+		}
 }
 
 void usuario::consultarMaquina(){

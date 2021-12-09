@@ -4,23 +4,34 @@
 #include<string.h>
 #include<iostream>
 #include<fstream>
+#include<list>
 
 using namespace std;
+
+struct reserva{
+	string RUsuario_;
+	string RInicio_, RFin_, RRecursos_;
+};
 
 class usuario {
 private:
 	string idUsuario_;
-	string contraseña_;
+	string contrasena_;
 	string mail_;
 	string nombreCompleto_;
 	int tiempo_, recursos_, telefono_;
+	list <reserva> reservas_;
+
 
 public:
+	usuario();
+	~usuario();
+
 	inline void setID(string x){idUsuario_=x;};
 	inline string getID(){return idUsuario_;};
 
-	inline void setContraseña(string x){contraseña_=x;};
-	inline string getContraseña(){return contraseña_;};
+	inline void setContrasena(string x){contrasena_=x;};
+	inline string getContrasena(){return contrasena_;};
 
 	inline void setCorreo(string x){mail_=x;};
 	inline string getCorreo(){return mail_;};
@@ -41,6 +52,7 @@ public:
 	void crearReserva();
 	void modReserva();
 	void eliminarReserva();
+	void cargarReserva();
 	void consultarReserva();
 	void consultarMaquina();
 };
