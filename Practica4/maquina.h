@@ -1,21 +1,30 @@
 #ifndef MAQUINA_H
 #define MAQUINA_H
 
+#include <iostream>
+#include <fstream>
+#include <string.h>
+#include <vector>
+
 using namespace std;
 
 class maquina {
 private:
-	int id_, recursos_;
+	int id, recursos;
 public:
 	maquina();
+	maquina(int i,int resources);
 
-	inline void setId(int x){id_=x;};
-	inline int getId(){return id_;};
+	inline void setId(int x){id=x;};
+	inline int getId(){return id;};
 
-	inline void setRecursos(int x){recursos_=x;};
-	inline int getRecursos(){return recursos_;};
+	inline void setRecursos(int x){recursos=x;};
+	inline int getRecursos(){return recursos;};
 
-	void selecMaquina();
+	void crearMaquina();
+	bool comprobarMaquina();
+	void modificarMaquina();
+	int selecMaquina();
 	void selecFecha();
 	void confirmarReserva();
 	void consultarFecha();
