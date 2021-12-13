@@ -19,7 +19,7 @@ void maquina::crearMaquina()
 		else
 		{
 			fich<<id<<" "<<recursos<<endl;
-			cout<<"Máquina guardada"<<endl;
+			cout<<"Mï¿½quina guardada"<<endl;
 			fich.close();
 		}
 		
@@ -64,7 +64,7 @@ void maquina::modificarMaquina()
 			for (int j = 0;j<i;j++)
 			{
 				fich2<<m[j].id<<" "<<m[j].recursos<<endl;
-				cout<<"Máquina actualizada"<<endl;
+				cout<<"Mï¿½quina actualizada"<<endl;
 				fich2.close();
 			}
 		}
