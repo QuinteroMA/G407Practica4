@@ -24,6 +24,7 @@ public:
 	void crearMaquina();
 	bool comprobarMaquina();
 	void modificarMaquina();
+	void eliminarMaquina();
 	int selecMaquina();
 	void selecFecha();
 	void confirmarReserva();
