@@ -1,5 +1,6 @@
 #include "usuario.h"
-
+#include <string>
+#include <vector>
 
 int diasMes(int x){
 	int dias=0;
@@ -82,15 +83,15 @@ bool usuario::modReserva(string x){
 		}
 		else if(ai<year) valido=false;
 
-		if(!valido) cout<<endl<<"La fecha de inicio de la reserva no es vÃ¡lida, insertela de nuevo."<<endl;
+		if(!valido) cout<<endl<<"La fecha de inicio de la reserva no es válida, insertela de nuevo."<<endl;
 	}while(!valido);
 
-	cout<<endl<<"Cuantos dÃ­as vas a reservar?"<<endl;
+	cout<<endl<<"Cuantos días vas a reservar?"<<endl;
 
 	do{
 		cin>>tiempo;
 		if(tiempo<1 || tiempo>getTiempo())
-			cout<<"El tiempo no es vÃ¡lido, inserte de nuevo."<<endl;
+			cout<<"El tiempo no es válido, inserte de nuevo."<<endl;
 	}while(tiempo<1 || tiempo>getTiempo());
 
 	for (it = reservas_.begin(); it != reservas_.end(); ++it){
@@ -135,7 +136,7 @@ bool usuario::eliminarReserva(string x){
 	return false;
 }
 
-void usuario::cargarReserva(){
+/*void usuario::cargarReserva(){
 
 	reservas_.clear();
 		ifstream fiche("reservas.txt");
@@ -173,17 +174,17 @@ void usuario::cargarReserva(){
 			aux.fMes_=fm;
 			aux.fAno_=fa;
 			aux.RRecursos_=recur;
-			reservas_.push_back(aux);	//AÃ±adir la nueva reserva al final de la lista
+			reservas_.push_back(aux);	//Añadir la nueva reserva al final de la lista
 
 			getline(fiche,user,',');
 		}
 	fiche.close();
-}
+}*/
 
 
 void usuario::consultarReserva(){
 	list<reserva>::iterator it;
-	cout<<"Id reserva \t Fecha de inicio \t Fecha de finalizaciÃ³n \t Recursos reservados\n";
+	cout<<"Id reserva \t Fecha de inicio \t Fecha de finalización \t Recursos reservados\n";
 	for (it = reservas_.begin(); it != reservas_.end(); ++it){
 		if(it->RUsuario_==getID()||getRol()==1){
 			cout<<it->RID_<<"\t"<<it->iDia_<<"/"<<it->iMes_<<"/"<<it->iAno_<<"\t"
@@ -195,6 +196,49 @@ void usuario::consultarReserva(){
 void usuario::consultarMaquina(){
 
 }
+
+usuario usuario::identificarse(string username, string passw)
+	{
+		ifstream fich("usuarios.txt");
+		if (!fich)
+		{cout<<"Error al abrir el fichero usuarios \n";}
+		else
+		{
+			bool res = false;
+			vector<usuario> info;
+			usuario aux;
+			int i =0;
+			while (!fich.eof())
+			{
+				fich>>aux.idUsuario_;
+				fich>>aux.contrasena_;
+				fich>>aux.mail_;
+				fich>>aux.nombreCompleto_;
+				fich>>aux.tiempo_;
+				fich>>aux.recursos_;
+				fich>>aux.telefono_;
+				fich>>aux.rol_;
+				info.push_back(aux);
+				i++;
+			}
+			
+			for(int j=0;j<i;j++)
+			{
+				if (info[j].idUsuario_==username && info[j].contrasena_ == passw)
+				{
+					res==true;
+					return info[j];	
+				}
+			}
+			if (res == false)
+			{
+				return usuario();
+			}
+			
+			fich.close();
+		}
+	}
+
 
 void usuario::modificarUsuario()
 {
@@ -227,11 +271,11 @@ void usuario::modificarUsuario()
 		cout << "Para respuesta afirmativa: si" << endl;
 		cout << "Para respuesta negativa: no" << endl;
 
-		cout<<"Quieres editar la contraseÃ±a del usuario "<<seleccion<<"? ";
+		cout<<"Quieres editar la contraseña del usuario "<<seleccion<<"? ";
 		cin>>answ;
 
 		if (answ == "si"){
-			cout << "Introduce la nueva contraseÃ±a para el usuario " <<seleccion;
+			cout << "Introduce la nueva contraseña para el usuario " <<seleccion;
 			cin>>mod;
 			for (int j = 0;j<i;j++)
 			{
@@ -320,7 +364,7 @@ void usuario::modificarUsuario()
 			for (int j = 0;j<i;j++)
 			{
 				fich2<<m[j].id<<" "<<m[j].recursos<<endl;
-				cout<<"Mï¿½quina actualizada"<<endl;
+				cout<<"M?quina actualizada"<<endl;
 				fich2.close();
 			}
 		}*/

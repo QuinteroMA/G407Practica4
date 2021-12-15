@@ -56,6 +56,7 @@ public:
 
 
 	void crearReserva();
+	usuario identificarse(string username, string passw);
 	bool modReserva(string x);
 	bool eliminarReserva(string x);
 	void cargarReserva();

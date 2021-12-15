@@ -1,7 +1,6 @@
 #include "sistema.h"
 #include <vector>
 
-
 	sistema::sistema(string name, string pass){
 		setUser(name);
 		setPass(pass);
@@ -17,43 +16,48 @@
 		pass = password;
 	}
 
-	int sistema::identificarse()
+/*	string sistema::identificarse()
 	{
-		ifstream fich("logininfo.txt");
+		ifstream fich("usuarios.txt");
 		if (!fich)
-		{cout<<"Error al abrir el fichero logininfo\n";}
+		{cout<<"Error al abrir el fichero usuarios \n";}
 		else
 		{
 			bool res = false;
-			vector<login> info;
-			login aux;
+			vector<usuario> info;
+			usuario aux;
 			int i =0;
 			while (!fich.eof())
 			{
-				fich>>aux.username;
-				fich>>aux.passw;
-				fich>>aux.id;
-				fich>>aux.rol;
+				fich>>aux.idUsuario_;
+				fich>>aux.contrasena_;
+				fich>>aux.mail_;
+				fich>>aux.nombreCompleto_;
+				fich>>aux.tiempo_;
+				fich>>aux.recursos_;
+				fich>>aux.telefono_;
+				fich>>aux.rol_;
 				info.push_back(aux);
 				i++;
 			}
 			
 			for(int j=0;j<i;j++)
 			{
-				if (info[j].username==user && info[j].passw == pass)
+				if (info[j].idUsuario_==user && info[j].contrasena_ == pass)
 				{
 					res==true;
-					return info[j].rol;	
+					return info[j].getID();	
 				}
 			}
 			if (res == false)
 			{
-				return 0;
+				return "";
 			}
 			
 			fich.close();
 		}
-	}
+	}*/
+	
 	void sistema::guardarDatos()
 	{
 		
@@ -70,3 +74,4 @@
 	{
 		
 	}
+

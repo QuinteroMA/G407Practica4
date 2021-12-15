@@ -1,0 +1,4 @@
+fernando 1234 fer@gmail.com fernandoLopez 3 2 123456789 1
+alvaro 1234 alv@gmail.com alvaro 3 2 123456789 2
+angel 1234 ang@gmail.com angel 3 2 123456789 3
+jose 1234 jos@gmail.com jose 3 2 123456789 3
