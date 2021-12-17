@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+#include<sstream>
 #include <string.h>
 #include <vector>
 
@@ -24,7 +25,6 @@ public:
 	void crearMaquina();
 	bool comprobarMaquina();
 	void modificarMaquina();
-	void eliminarMaquina();
 	int selecMaquina();
 	void selecFecha();
 	void confirmarReserva();

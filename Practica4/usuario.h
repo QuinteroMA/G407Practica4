@@ -1,6 +1,7 @@
 #ifndef USUARIO_H
 #define USUARIO_H
 
+#include<sstream>
 #include<string.h>
 #include<iostream>
 #include<fstream>
@@ -24,11 +25,12 @@ private:
 	string nombreCompleto_;
 	int tiempo_, recursos_, telefono_,rol_;
 	list <reserva> reservas_;
+	list<usuario> usuario_;
 
 
 public:
 	usuario();
-	usuario(string id, string contrasena, string nombre, int rol, string mail,  int tiempo, int recursos, int telefono);
+	usuario(string id, string contrasena, string mail, string nombre,  int tiempo, int recursos, int telefono, int rol);
 
 	inline void setID(string x){idUsuario_=x;};
 	inline string getID(){return idUsuario_;};
@@ -54,12 +56,14 @@ public:
 	inline void setTelefono(int x){telefono_=x;};
 	inline int getTelefono(){return telefono_;};
 
+    inline list<usuario> getListaUser(){return usuario_;};
 
 	void crearReserva();
-	usuario identificarse(string username, string passw);
 	bool modReserva(string x);
 	bool eliminarReserva(string x);
 	void cargarReserva();
+	usuario identificarse(string username, string passw);
+	void cargarUsuarios();
 	void consultarReserva();
 	void consultarMaquina();
     void modificarUsuario();

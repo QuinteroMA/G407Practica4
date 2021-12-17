@@ -7,14 +7,15 @@ class administrador : public usuario
 {
 
     private:
+    list<usuario>usuarios_;
 
     public:
-        administrador();
+        administrador(usuario x);
         ~administrador();
 
-    void crearUsuario();
-
-	int seleccionarUsuario();
+    bool validarUser();
+    bool crearUsuario(usuario x);
+	string seleccionarUsuario();
 };
 
 #endif // ADMINISTRADOR_H

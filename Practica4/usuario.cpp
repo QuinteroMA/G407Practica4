@@ -1,6 +1,6 @@
 #include "usuario.h"
-#include <string>
-#include <vector>
+
+
 
 int diasMes(int x){
 	int dias=0;
@@ -35,7 +35,7 @@ usuario::usuario(){
     setTelefono(0);
 }
 
-usuario::usuario(string id, string contrasena, string nombre, int rol, string mail,  int tiempo, int recursos, int telefono){
+usuario::usuario(string id, string contrasena, string mail, string nombre,  int tiempo, int recursos, int telefono, int rol){
     setID(id);
     setContrasena(contrasena);
     setRol(rol);
@@ -83,19 +83,19 @@ bool usuario::modReserva(string x){
 		}
 		else if(ai<year) valido=false;
 
-		if(!valido) cout<<endl<<"La fecha de inicio de la reserva no es válida, insertela de nuevo."<<endl;
+		if(!valido) cout<<endl<<"La fecha de inicio de la reserva no es vÃ¡lida, insertela de nuevo."<<endl;
 	}while(!valido);
 
-	cout<<endl<<"Cuantos días vas a reservar?"<<endl;
+	cout<<endl<<"Cuantos dÃ­as vas a reservar?"<<endl;
 
 	do{
 		cin>>tiempo;
 		if(tiempo<1 || tiempo>getTiempo())
-			cout<<"El tiempo no es válido, inserte de nuevo."<<endl;
+			cout<<"El tiempo no es vÃ¡lido, inserte de nuevo."<<endl;
 	}while(tiempo<1 || tiempo>getTiempo());
 
 	for (it = reservas_.begin(); it != reservas_.end(); ++it){
-		if (it->RID_==x){
+		if (it->RID_==x && (it->RUsuario_==getID()||getRol()==1)){
 			cout<<endl<<"Inserta cuantos recursos deseas reservar."<<endl;
 			do{
 				cin>>recursos;
@@ -128,7 +128,7 @@ bool usuario::modReserva(string x){
 bool usuario::eliminarReserva(string x){
 	list<reserva>::iterator it;
 	for (it = reservas_.begin(); it != reservas_.end(); ++it){
-		if (it->RID_==x && it->RUsuario_==getID()){
+		if (it->RID_==x && (it->RUsuario_==getID()||getRol()==1)){
 			reservas_.erase(it);
 			return true;
 		}
@@ -136,7 +136,7 @@ bool usuario::eliminarReserva(string x){
 	return false;
 }
 
-/*void usuario::cargarReserva(){
+void usuario::cargarReserva(){
 
 	reservas_.clear();
 		ifstream fiche("reservas.txt");
@@ -174,17 +174,17 @@ bool usuario::eliminarReserva(string x){
 			aux.fMes_=fm;
 			aux.fAno_=fa;
 			aux.RRecursos_=recur;
-			reservas_.push_back(aux);	//Añadir la nueva reserva al final de la lista
+			reservas_.push_back(aux);	//AÃ±adir la nueva reserva al final de la lista
 
 			getline(fiche,user,',');
 		}
 	fiche.close();
-}*/
+}
 
 
 void usuario::consultarReserva(){
 	list<reserva>::iterator it;
-	cout<<"Id reserva \t Fecha de inicio \t Fecha de finalización \t Recursos reservados\n";
+	cout<<"Id reserva \t Fecha de inicio \t Fecha de finalizaciÃ³n \t Recursos reservados\n";
 	for (it = reservas_.begin(); it != reservas_.end(); ++it){
 		if(it->RUsuario_==getID()||getRol()==1){
 			cout<<it->RID_<<"\t"<<it->iDia_<<"/"<<it->iMes_<<"/"<<it->iAno_<<"\t"
@@ -197,49 +197,6 @@ void usuario::consultarMaquina(){
 
 }
 
-usuario usuario::identificarse(string username, string passw)
-	{
-		ifstream fich("usuarios.txt");
-		if (!fich)
-		{cout<<"Error al abrir el fichero usuarios \n";}
-		else
-		{
-			bool res = false;
-			vector<usuario> info;
-			usuario aux;
-			int i =0;
-			while (!fich.eof())
-			{
-				fich>>aux.idUsuario_;
-				fich>>aux.contrasena_;
-				fich>>aux.mail_;
-				fich>>aux.nombreCompleto_;
-				fich>>aux.tiempo_;
-				fich>>aux.recursos_;
-				fich>>aux.telefono_;
-				fich>>aux.rol_;
-				info.push_back(aux);
-				i++;
-			}
-			
-			for(int j=0;j<i;j++)
-			{
-				if (info[j].idUsuario_==username && info[j].contrasena_ == passw)
-				{
-					res==true;
-					return info[j];	
-				}
-			}
-			if (res == false)
-			{
-				return usuario();
-			}
-			
-			fich.close();
-		}
-	}
-
-
 void usuario::modificarUsuario()
 {
 	int seleccion; //= seleccionarUsuario();
@@ -247,8 +204,7 @@ void usuario::modificarUsuario()
 	int modn;
 	string answ = "no";
 	int i = 0;
-	list<usuario> u;
-//	maquina aux;
+	usuario aux;
 	ifstream fich("usuarios.txt");
 		if (!fich)
 		{cout<<"Error al abrir el fichero usuarios.txt\n";}
@@ -256,26 +212,40 @@ void usuario::modificarUsuario()
 		{
 			while (!fich.eof())
 			{
-/*				fich>>aux.idUsuario_;
-				fich>>aux.contrasena_;
-				fich>>aux.mail_;
-				fich>>aux.nombreCompleto_;
-				fich>>aux.tiempo_;
-				fich>>aux.recursos_;
-				fich>>aux.telefono_;
-				u.push_back(aux);
-				i++;*/
+                string saux;
+                int iaux;
+                fich>>saux;
+                aux.setID(saux);
+                fich>>saux;
+                aux.setContrasena(saux);
+                fich>>saux;
+                aux.setCorreo(saux);
+                fich>>saux;
+                aux.setNombre(saux);
+                fich>>saux;
+                iaux=stoi(saux);
+                aux.setTiempo(iaux);
+                fich>>saux;
+                iaux=stoi(saux);
+                aux.setRecursos(iaux);
+                fich>>saux;
+                iaux=stoi(saux);
+                aux.setTelefono(iaux);
+                fich>>saux;
+                iaux=stoi(saux);
+                aux.setRol(iaux);
+
 			}
 
 		cout << "Para contestar hagalo siempre de la siguiente forma: " << endl;
 		cout << "Para respuesta afirmativa: si" << endl;
 		cout << "Para respuesta negativa: no" << endl;
 
-		cout<<"Quieres editar la contraseña del usuario "<<seleccion<<"? ";
+		cout<<"Quieres editar la contraseÃ±a del usuario "<<seleccion<<"? ";
 		cin>>answ;
 
 		if (answ == "si"){
-			cout << "Introduce la nueva contraseña para el usuario " <<seleccion;
+			cout << "Introduce la nueva contraseÃ±a para el usuario " <<seleccion;
 			cin>>mod;
 			for (int j = 0;j<i;j++)
 			{
@@ -364,8 +334,51 @@ void usuario::modificarUsuario()
 			for (int j = 0;j<i;j++)
 			{
 				fich2<<m[j].id<<" "<<m[j].recursos<<endl;
-				cout<<"M?quina actualizada"<<endl;
+				cout<<"Mï¿½quina actualizada"<<endl;
 				fich2.close();
 			}
 		}*/
+}
+
+void usuario::cargarUsuarios(){
+    usuario aux;
+	ifstream fich("usuarios.txt");
+	while (!fich.eof())	{
+		string saux;
+        int iaux;
+        fich>>saux;
+        aux.setID(saux);
+        fich>>saux;
+        aux.setContrasena(saux);
+        fich>>saux;
+        aux.setCorreo(saux);
+        fich>>saux;
+        aux.setNombre(saux);
+        fich>>saux;
+        iaux=stoi(saux);
+        aux.setTiempo(iaux);
+        fich>>saux;
+        iaux=stoi(saux);
+        aux.setRecursos(iaux);
+        fich>>saux;
+        iaux=stoi(saux);
+        aux.setTelefono(iaux);
+        fich>>saux;
+        iaux=stoi(saux);
+        aux.setRol(iaux);
+		usuario_.push_back(aux);
+	}
+	fich.close();
+}
+
+usuario usuario::identificarse(string username, string passw) {
+
+    list<usuario>::iterator it;
+	bool res=false;
+	usuario aux;
+	for(it = usuario_.begin(); it != usuario_.end(); ++it){
+		if (it->getID()==username && it->getContrasena() == passw)
+			aux = *it;
+	}
+    return aux;
 }

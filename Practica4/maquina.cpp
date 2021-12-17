@@ -19,7 +19,7 @@ void maquina::crearMaquina()
 		else
 		{
 			fich<<id<<" "<<recursos<<endl;
-			cout<<"Máquina guardada"<<endl;
+			cout<<"Mï¿½quina guardada"<<endl;
 			fich.close();
 		}
 		
@@ -64,7 +64,7 @@ void maquina::modificarMaquina()
 			for (int j = 0;j<i;j++)
 			{
 				fich2<<m[j].id<<" "<<m[j].recursos<<endl;
-				cout<<"Máquina actualizada"<<endl;
+				cout<<"Mï¿½quina actualizada"<<endl;
 				fich2.close();
 			}
 		}
@@ -129,46 +129,6 @@ bool maquina::comprobarMaquina()
 		else
 		{return false;}
 	}
-}
-
-void maquina::eliminarMaquina()
-{
-	int seleccion = selecMaquina();
-	int i = 0;
-	vector<maquina> m;
-	maquina aux;
-	ifstream fich("maquinas.txt");
-		if (!fich)
-		{cout<<"Error al abrir el fichero logininfo\n";}
-		else
-		{
-			while (!fich.eof())
-			{
-				fich>>aux.id;
-				fich>>aux.recursos;
-				m.push_back(aux);
-				i++;
-			}
-		
-		fich.close();
-		
-	    ofstream fich2("maquinas.txt",ios::out);
-		if (!fich2)
-		{cout<<"Error al abrir el fichero maquinas.txt\n";}
-		else
-		{
-			for (int j = 0;j<i;j++)
-			{
-				if (m[j].id != seleccion)
-				{
-				fich2<<m[j].id<<" "<<m[j].recursos<<endl;
-				}
-			}
-			cout<<"Máquina Eliminada"<<endl;
-			fich2.close();
-		}
-		
-		}
 }
 
 void maquina::selecFecha(){
