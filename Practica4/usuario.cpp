@@ -203,6 +203,7 @@ void usuario::modificarUsuario()
 	string mod;
 	int modn;
 	string answ = "no";
+	vector<usuario> u;
 	int i = 0;
 	usuario aux;
 	ifstream fich("usuarios.txt");
