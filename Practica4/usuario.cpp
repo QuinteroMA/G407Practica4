@@ -199,7 +199,7 @@ void usuario::consultarMaquina(){
 
 void usuario::modificarUsuario()
 {
-	int seleccion; //= seleccionarUsuario();
+	int seleccion;
 	string mod;
 	int modn;
 	string answ = "no";
@@ -249,8 +249,8 @@ void usuario::modificarUsuario()
 			cin>>mod;
 			for (int j = 0;j<i;j++)
 			{
-				/*if (u[j].idUsuario_ == seleccion){
-					u[j].contrasena_ = mod;*/
+				if (u[j].idUsuario_ == seleccion){
+					u[j].contrasena_ = mod;
 				}
 			}
 		}
@@ -263,9 +263,9 @@ void usuario::modificarUsuario()
 			cin>>mod;
 			for (int j = 0;j<i;j++)
 			{
-				/*if (u[j].idUsuario_ == seleccion){
+				if (u[j].idUsuario_ == seleccion){
 					u[j].mail_ = mod;
-				}*/
+				}
 			}
 		}
 
@@ -277,9 +277,9 @@ void usuario::modificarUsuario()
 			cin>>mod;
 			for (int j = 0;j<i;j++)
 			{
-			/*	if (u[j].idUsuario_ == seleccion){
+				if (u[j].idUsuario_ == seleccion){
 					u[j].nombreCompleto_ = mod;
-				}*/
+				}
 			}
 		}
 
@@ -291,9 +291,9 @@ void usuario::modificarUsuario()
 			cin>>modn;
 			for (int j = 0;j<i;j++)
 			{
-				/*if (u[j].idUsuario_ == seleccion){
+				if (u[j].idUsuario_ == seleccion){
 					u[j].tiempo_ = modn;
-				}*/
+				}
 			}
 		}
 
@@ -305,9 +305,9 @@ void usuario::modificarUsuario()
 			cin>>modn;
 			for (int j = 0;j<i;j++)
 			{
-			/*	if (u[j].idUsuario_ == seleccion){
+				if (u[j].idUsuario_ == seleccion){
 					u[j].recursos_ = modn;
-				}*/
+				}
 			}
 		}
 
@@ -319,25 +319,13 @@ void usuario::modificarUsuario()
 			cin>>modn;
 			for (int j = 0;j<i;j++)
 			{
-				/*if (u[j].idUsuario_ == seleccion){
+				if (u[j].idUsuario_ == seleccion){
 					u[j].telefono_ = modn;
-				}*/
+				}
 			}
 		}
 
 		fich.close();
-	   /* ofstream fich2("maquinas.txt",ios::out);
-		if (!fich2)
-		{cout<<"Error al abrir el fichero maquinas.txt\n";}
-		else
-		{
-			for (int j = 0;j<i;j++)
-			{
-				fich2<<m[j].id<<" "<<m[j].recursos<<endl;
-				cout<<"M�quina actualizada"<<endl;
-				fich2.close();
-			}
-		}*/
 }
 
 void usuario::cargarUsuarios(){
