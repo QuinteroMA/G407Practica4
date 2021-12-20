@@ -8,9 +8,9 @@ maquina m(1,1);
 maquina m2(2,3);
 maquina m3(7,4);
 
-EXPECT_TRUE(m3.comprobarReserva());
-EXPECT_FALSE(m2.comprobarReserva());
-EXPECT_FALSE(m.comprobarReserva());
+EXPECT_FALSE(m3.comprobarReserva());
+EXPECT_TRUE(m2.comprobarReserva());
+EXPECT_TRUE(m.comprobarReserva());
 
 }
 
