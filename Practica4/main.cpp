@@ -35,7 +35,7 @@ int main()
 		cout<<"1. Crear usuario"<<endl;
 		cout<<"2. Eliminar usuario"<<endl;
 		cout<<"3. Modificar usuario"<<endl;
-		cout<<"4. Crear reserva"<<endl;
+		cout<<"4. Crear reserva (opción no implementada)"<<endl;
 		cout<<"5. Eliminar reserva"<<endl;
 		cout<<"6. Modificar reserva"<<endl;
 		cout<<"7. Ver reservas"<<endl;
@@ -141,12 +141,8 @@ int main()
 
 		switch(elec)
 		{
-			case 1:cout<<"Introduce una opcion valida\n";
-				break;
-			case 2:cout<<"Introduce una opcion valida\n";
-				break;
-			case 3:
-			{
+			case 1:
+				{
 				int id,recursos;
 			cout<<"Introduce el Id de la nueva m�quina: ";
 			cin>>id;
@@ -165,17 +161,48 @@ int main()
 
 			}
 				break;
-
-			case 4:
-			{
+			case 2:
+				{
 				maquina m(0,0);
 				m.modificarMaquina();
 			}
 				break;
+			case 3:
+				{
+				maquina m(0,0);
+				m.eliminarMaquina();
+			}
+				break;
+			case 4:
+				{
+				cout<<"Introduce una opcion valida\n"
+			}
+			break;	
+			
+			 case 5:
+    		        {
+    		            string idreserva;
+         		    admin.consultarReserva();
+         		    cin>>idreserva;
+         		    if(admin.eliminarReserva(idreserva))
+         		       cout<<"Reserva eliminada correctamente";
+            		}
+				break;
+            		case 6:
+   		         {
+    		            string idreserva;
+    		            admin.consultarReserva();
+    		            cin>>idreserva;
+       		            if(admin.modReserva(idreserva))
+      		            cout<<"Reserva modificada correctamente";
+     		       }
+				break;
+				
 			default: cout<<"Introduce una opcion valida\n";
 		}
 		}while(elec!=0);
 	}
+	
 	else{
 		do{
 		cout<<"Bienvenido: "<<endl;
