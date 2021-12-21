@@ -64,6 +64,8 @@ public:
 	void cargarReserva();
 	usuario identificarse(string username, string passw);
 	void cargarUsuarios();
+	void crearUsuario();
+	string seleccionarUsuario();
 	void consultarReserva();
 	void consultarMaquina();
     void modificarUsuario();

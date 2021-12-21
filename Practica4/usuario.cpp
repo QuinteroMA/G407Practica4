@@ -1,4 +1,5 @@
 #include "usuario.h"
+#include <vector>
 
 
 
@@ -370,4 +371,192 @@ usuario usuario::identificarse(string username, string passw) {
 			aux = *it;
 	}
     return aux;
+}
+
+// --------------------========================--------------------========================--------------------========================--------------------
+
+void usuario::crearUsuario()
+{
+	ofstream fich("usuarios.txt",ios::app);//ios::app agrega al final
+		if (!fich)
+		{cout<<"Error al abrir el fichero usuarios.txt\n";}
+		else
+		{
+			fich<<idUsuario_<<" "<<contrasena_<<" "<<mail_<<" "<<nombreCompleto_<<" "<<tiempo_<<" "<<recursos_<<" "<<telefono_<<endl;
+			cout<<"Usuario guardado con exito"<<endl;
+			fich.close();
+		}
+
+}
+
+void usuario::modificarUsuario()
+{
+	string seleccion;
+	string mod;
+	int modn;
+	string answ = "no";
+	vector<usuario> u;
+	int i = 0;
+	usuario aux;
+	ifstream fich("usuarios.txt");
+		if (!fich)
+		{cout<<"Error al abrir el fichero usuarios.txt\n";}
+		else
+		{
+			while (!fich.eof())
+			{
+                string saux;
+                int iaux;
+                fich>>saux;
+                aux.setID(saux);
+                fich>>saux;
+                aux.setContrasena(saux);
+                fich>>saux;
+                aux.setCorreo(saux);
+                fich>>saux;
+                aux.setNombre(saux);
+                fich>>saux;
+                iaux=stoi(saux);
+                aux.setTiempo(iaux);
+                fich>>saux;
+                iaux=stoi(saux);
+                aux.setRecursos(iaux);
+                fich>>saux;
+                iaux=stoi(saux);
+                aux.setTelefono(iaux);
+                fich>>saux;
+                iaux=stoi(saux);
+                aux.setRol(iaux);
+
+			}
+
+		cout << "Para contestar hagalo siempre de la siguiente forma: " << endl;
+		cout << "Para respuesta afirmativa: si" << endl;
+		cout << "Para respuesta negativa: no" << endl;
+
+		cout<<"Quieres editar la contraseña del usuario "<<seleccion<<"? ";
+		cin>>answ;
+
+		if (answ == "si"){
+			cout << "Introduce la nueva contraseña para el usuario " <<seleccion;
+			cin>>mod;
+			for (int j = 0;j<i;j++)
+			{
+				if (u[j].idUsuario_ == seleccion){
+					u[j].contrasena_ = mod;
+				}
+			}
+		}
+
+		cout<<"Quieres editar el mail del usuario "<<seleccion<<"? ";
+		cin>>answ;
+
+		if (answ == "si"){
+			cout << "Introduce el nuevo mail para el usuario " <<seleccion;
+			cin>>mod;
+			for (int j = 0;j<i;j++)
+			{
+				if (u[j].idUsuario_ == seleccion){
+					u[j].mail_ = mod;
+				}
+			}
+		}
+
+		cout<<"Quieres editar el nombre completo del usuario "<<seleccion<<"? ";
+		cin>>answ;
+
+		if (answ == "si"){
+			cout << "Introduce el nuevo nombre completo para el usuario " <<seleccion;
+			cin>>mod;
+			for (int j = 0;j<i;j++)
+			{
+				if (u[j].idUsuario_ == seleccion){
+					u[j].nombreCompleto_ = mod;
+				}
+			}
+		}
+
+		cout<<"Quieres editar el tiempo del usuario "<<seleccion<<"? ";
+		cin>>answ;
+
+		if (answ == "si"){
+			cout << "Introduce el nuevo tiempo para el usuario " <<seleccion;
+			cin>>modn;
+			for (int j = 0;j<i;j++)
+			{
+				if (u[j].idUsuario_ == seleccion){
+					u[j].tiempo_ = modn;
+				}
+			}
+		}
+
+		cout<<"Quieres editar los recursos del usuario "<<seleccion<<"? ";
+		cin>>answ;
+
+		if (answ == "si"){
+			cout << "Introduce los nuevos recursos para el usuario " <<seleccion;
+			cin>>modn;
+			for (int j = 0;j<i;j++)
+			{
+				if (u[j].idUsuario_ == seleccion){
+					u[j].recursos_ = modn;
+				}
+			}
+		}
+
+		cout<<"Quieres editar el telefono del usuario "<<seleccion<<"? ";
+		cin>>answ;
+
+		if (answ == "si"){
+			cout << "Introduce el nuevo telefono para el usuario " <<seleccion;
+			cin>>modn;
+			for (int j = 0;j<i;j++)
+			{
+				if (u[j].idUsuario_ == seleccion){
+					u[j].telefono_ = modn;
+				}
+			}
+		}
+
+		fich.close();
+	}
+}
+
+string usuario::seleccionarUsuario(){
+	int i = 0;
+	string id = "";
+	vector<usuario> u;
+	usuario aux;
+	ifstream fich("usuarios.txt");
+	if (!fich)
+	{cout<<"Error al abrir el fichero usuarios.txt\n";}
+	else
+	{
+		while (!fich.eof())
+			{
+				fich>>aux.idUsuario_;
+				fich>>aux.contrasena_;
+				fich>>aux.mail_;
+				fich>>aux.nombreCompleto_;
+				fich>>aux.tiempo_;
+				fich>>aux.recursos_;
+				fich>>aux.telefono_;
+				u.push_back(aux);
+				i++;
+			}
+		for (int j = 0;j<(i-1);j++)
+		{
+			cout <<"Id del Usuario: "<<u[j].idUsuario_<<endl;
+			cout <<" -> Contrasena del usuario: "<<u[j].contrasena_<<endl;
+			cout <<" -> Mail del usuario: "<<u[j].mail_<<endl;
+			cout <<" -> Nombre completo del usuario: "<<u[j].nombreCompleto_<<endl;
+			cout <<" -> Tiempo del usuario: "<<u[j].tiempo_<<endl;
+			cout <<" -> Recursos del usuario: "<<u[j].recursos_<<endl;
+			cout <<" -> telefono_ del usuario: "<<u[j].telefono_<<endl;
+		}
+		cout<<"Introduce el id del usuario que quiere modificar o eliminar: ";
+		cin>>id;
+	}
+	fich.close();
+	return id;
 }
